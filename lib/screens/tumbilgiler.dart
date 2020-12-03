@@ -1,4 +1,3 @@
-import 'package:covidapp/models/covid.dart';
 import 'package:covidapp/models/covidlist.dart';
 import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/wisdgets/table_row.dart';

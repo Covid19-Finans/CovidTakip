@@ -6,7 +6,6 @@ import 'package:covidapp/wisdgets/table_row.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'models/covid.dart';
 
 void main() {
   runApp(MaterialApp(

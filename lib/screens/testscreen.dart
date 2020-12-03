@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class Test extends StatefulWidget {
   @override
@@ -6,8 +7,16 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
+  Future<dynamic> soru() {}
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        child: FutureBuilder(
+          builder: (context, snapshot) {},
+        ),
+      ),
+    );
   }
 }
