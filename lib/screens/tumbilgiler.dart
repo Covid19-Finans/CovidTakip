@@ -1,9 +1,11 @@
 import 'package:covidapp/models/covid.dart';
+import 'package:covidapp/models/covidlist.dart';
+import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/wisdgets/table_row.dart';
 import 'package:flutter/material.dart';
 
 class TumBilgiler extends StatelessWidget {
-  List<Covid> bilgiler;
+  List<CovidList> bilgiler;
   TumBilgiler({@required this.bilgiler});
 
   @override
@@ -34,26 +36,21 @@ class TumBilgiler extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    child: Text("${bilgiler[diziindex - index].date}"),
+                    child: Text(
+                        "${bilgiler[diziindex - index].lastUpdatedAtApify}"),
                   ),
                   TableData(
-                      text: "Vefat Sayısı",
-                      sondeger: bilgiler[diziindex - index].deaths,
-                      dunkudeger: index >= toplam - 1
-                          ? 0
-                          : bilgiler[diziindex - value].deaths),
+                    text: "Vefat Sayısı ",
+                    sondeger: bilgiler[diziindex - index].dailyDeceased,
+                  ),
                   TableData(
-                      text: "İyileşen Sayısı",
-                      sondeger: bilgiler[diziindex - index].recovered,
-                      dunkudeger: index >= toplam - 1
-                          ? 0
-                          : bilgiler[diziindex - value].recovered),
+                    text: "İyileşen Sayısı",
+                    sondeger: bilgiler[diziindex - index].recovered,
+                  ),
                   TableData(
-                      text: "Aktif Hasta Sayısı Sayısı",
-                      sondeger: bilgiler[diziindex - index].active,
-                      dunkudeger: index >= toplam - 1
-                          ? 0
-                          : 0 /*bilgiler[diziindex - value].active*/),
+                    text: "Aktif Hasta Sayısı Sayısı",
+                    sondeger: bilgiler[diziindex - index].dailyInfected,
+                  ),
                 ],
               ),
             );

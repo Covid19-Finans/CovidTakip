@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class TableData extends StatelessWidget {
   int sondeger;
-  int dunkudeger;
   String text;
 
   TableData({@required this.text, @required this.sondeger});

@@ -1,3 +1,4 @@
+import 'package:covidapp/models/covidlist.dart';
 import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/screens/tumbilgiler.dart';
 import 'package:covidapp/wisdgets/headerwidget.dart';
@@ -19,16 +20,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<List<CovidLastest>> covid() async {
+  Future<List<CovidList>> covid() async {
     var url =
-        "https://api.apify.com/v2/key-value-stores/28ljlt47S5XEd1qIi/records/LATEST?disableRedirect=true";
+        "https://api.apify.com/v2/datasets/LYeOfHQwsv7FsfdGV/items?format=json&clean=1";
     var response = await http.get(url);
-    debugPrint(response.body);
+    //debugPrint(response.body);
     var jsonResponse = json.decode(response.body);
 
-    List<CovidLastest> datas = [];
-    CovidLastest covid = CovidLastest.fromJson(jsonResponse);
-    datas.add(covid);
+    List<CovidList> datas = [];
+    for (var u in jsonResponse) {
+      CovidList covid = CovidList.fromJson(u);
+      datas.add(covid);
+    }
+    int range = datas.length - 31;
+    datas.removeRange(0, range);
 
     return datas;
   }
@@ -79,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                               ],
                             ),
                             Text(
-                              "${snapshot.data[son - 1].dailyRecovered}",
+                              "Günlük Vaka Sayısı:${snapshot.data[son - 1].dailyInfected}",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
