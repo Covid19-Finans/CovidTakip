@@ -1,5 +1,5 @@
 import 'package:covidapp/models/covidlist.dart';
-import 'package:covidapp/models/lastdata.dart';
+
 import 'package:covidapp/screens/tumbilgiler.dart';
 import 'package:covidapp/wisdgets/headerwidget.dart';
 import 'package:covidapp/wisdgets/table_row.dart';

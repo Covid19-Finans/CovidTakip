@@ -1,5 +1,4 @@
 import 'package:covidapp/models/covidlist.dart';
-import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/wisdgets/table_row.dart';
 import 'package:flutter/material.dart';
 
