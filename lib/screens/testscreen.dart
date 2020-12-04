@@ -25,6 +25,7 @@ class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red,
       ),
@@ -36,27 +37,41 @@ class _TestState extends State<Test> {
               List<Soru> sorular = snapshot.data;
               return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      margin: EdgeInsets.all(20),
+                      height: MediaQuery.of(context).size.height * 3 / 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.red, width: 1),
+                      ),
+                      child: Center(
                         child: Text(
-                      "${sorular[index].soru}",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    )),
-                    Column(
+                          "${sorular[index].soru}",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height * 2 / 10,
-                          width: MediaQuery.of(context).size.width * 9.75 / 10,
+                          height: MediaQuery.of(context).size.height * 1 / 10,
+                          width: MediaQuery.of(context).size.width * 4 / 10,
                           child: RaisedButton(
                             elevation: 20,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Colors.red,
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                index = index + 1;
+                              });
+                            },
                             child: Text(
                               "Evet",
                               style: TextStyle(color: Colors.white),
@@ -65,14 +80,18 @@ class _TestState extends State<Test> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 10),
-                          height: MediaQuery.of(context).size.height * 2 / 10,
-                          width: MediaQuery.of(context).size.width * 9.75 / 10,
+                          height: MediaQuery.of(context).size.height * 1 / 10,
+                          width: MediaQuery.of(context).size.width * 4 / 10,
                           child: RaisedButton(
                             elevation: 20,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             color: Colors.white,
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                index = index + 1;
+                              });
+                            },
                             child: Text(
                               "Hayır",
                               style: TextStyle(color: Colors.red),
@@ -81,11 +100,6 @@ class _TestState extends State<Test> {
                         ),
                       ],
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 2 / 10,
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.red,
-                    )
                   ],
                 ),
               );
