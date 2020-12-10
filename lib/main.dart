@@ -1,17 +1,14 @@
 import 'package:covidapp/models/covidlist.dart';
-import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/screens/tumbilgiler.dart';
 import 'package:covidapp/widgets/headerwidget.dart';
 import 'package:covidapp/widgets/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'models/covid.dart';
 
 void main() {
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: Colors.white, body: MyApp())));
+      debugShowCheckedModeBanner: false, home: Scaffold(body: MyApp())));
 }
 
 class MyApp extends StatefulWidget {

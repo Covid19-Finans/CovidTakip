@@ -1,3 +1,4 @@
+import 'package:covidapp/screens/testscreen.dart';
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -26,7 +27,7 @@ class HeaderWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1 / 10,
+            height: MediaQuery.of(context).size.height * 0.25 / 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,7 +68,10 @@ class HeaderWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Test()));
+                },
               ),
             ],
           )
