@@ -70,7 +70,9 @@ class HeaderWidget extends StatelessWidget {
                 color: Colors.white,
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Test()));
+                    context,
+                    MaterialPageRoute(builder: (context) => Test()),
+                  );
                 },
               ),
             ],

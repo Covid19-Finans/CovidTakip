@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   http: ^0.12.2
   google_fonts: ^1.1.1
+  firebase_core: ^0.5.3
+  cloud_firestore: ^0.14.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -33,7 +35,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_name: ^0.0.1
+  flutter_launcher_icons: ^0.8.1
+flutter_icons:
+  image_path: "lib/assets/covid-19.png"
+  ios: true
+  android: true
+flutter_launcher_name:
+  name: "Sputnik-V"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -45,9 +54,8 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/assets/images/turkiye-haritasi-oto-sticker.jpg
     - lib/assets/sorular.json
-  #   - assets/images/turkiye-haritasi-oto-sticker.jpg
+    - lib/assets/iller.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
