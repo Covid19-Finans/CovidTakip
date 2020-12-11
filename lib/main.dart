@@ -10,8 +10,7 @@ import 'dart:convert';
 void main() async {
   // Firebase.initializeApp();
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: Colors.white, body: MyApp())));
+      debugShowCheckedModeBanner: false, home: Scaffold(body: MyApp())));
 }
 
 class MyApp extends StatefulWidget {

@@ -1,6 +1,4 @@
-import 'package:covidapp/models/covid.dart';
 import 'package:covidapp/models/covidlist.dart';
-import 'package:covidapp/models/lastdata.dart';
 import 'package:covidapp/widgets/details.dart';
 import 'package:flutter/material.dart';
 

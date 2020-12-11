@@ -1,9 +1,11 @@
 import 'package:covidapp/models/covidlist.dart';
+import 'package:covidapp/screens/daydetails.dart';
 import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../styles/colorandstyles.dart';
 import 'counter.dart';
 
+// ignore: must_be_immutable
 class CovidDetails extends StatelessWidget {
   CovidList data;
 
@@ -17,14 +19,20 @@ class CovidDetails extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(width * 0.015),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20)),
+        border: Border.all(color: Colors.red[200], width: 0.9),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 4),
-            blurRadius: 30,
-            color: kShadowColor,
-          ),
+            color: Colors.grey.withOpacity(1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(0, 3), // changes position of shadow
+          )
         ],
       ),
       child: Column(
@@ -57,7 +65,12 @@ class CovidDetails extends StatelessWidget {
                 title: "İyileşen",
               ),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DayDetails(data: data)));
+                },
                 color: Colors.white,
                 textColor: Colors.white,
                 child: Icon(

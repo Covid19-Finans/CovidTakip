@@ -27,7 +27,7 @@ class HeaderWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1 / 10,
+            height: MediaQuery.of(context).size.height * 0.25 / 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
