@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "417731542777",
+    "project_id": "sputnik-v-7bfdf",
+    "storage_bucket": "sputnik-v-7bfdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417731542777:android:0454928e448c4520702c28",
+        "android_client_info": {
+          "package_name": "com.example.covidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417731542777-s9lrcarr9vnni3au4cr3j5a9pgvds2jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj-245AQQNrSpgjOLEwIXDi_xhUhzcECg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417731542777-s9lrcarr9vnni3au4cr3j5a9pgvds2jm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

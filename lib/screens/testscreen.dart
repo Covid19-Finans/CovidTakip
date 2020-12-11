@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'dart:convert' as convert;
 
 class Test extends StatefulWidget {
@@ -9,6 +10,9 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   int index = 1;
+  int counter_yes = 0;
+
+  String city = "";
   Future<List<Soru>> getsoru() async {
     var response = await DefaultAssetBundle.of(context)
         .loadString("lib/assets/sorular.json");
@@ -22,6 +26,35 @@ class _TestState extends State<Test> {
     return sorular;
   }
 
+  Future<List<DropdownMenuItem>> getcity() async {
+    var response = await DefaultAssetBundle.of(context)
+        .loadString("lib/assets/iller.json");
+    var jsonResponse = convert.json.decode(response);
+    List<DropdownMenuItem> citys = [];
+    for (var city in jsonResponse.keys) {
+      citys.add(DropdownMenuItem(
+        child: Text(jsonResponse[city]),
+        value: jsonResponse[city],
+      ));
+    }
+    return citys;
+  }
+
+  Future<void> sonuc(String city) async {
+    await Firebase.initializeApp();
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection("CovidMap");
+
+    var snapshot = await reference.doc(city).get();
+    if (snapshot.exists) {
+      await reference
+          .doc(city)
+          .update({'possibly_infected': FieldValue.increment(1)});
+    } else {
+      await reference.doc(city).set({'possibly_infected': 1});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,111 +62,169 @@ class _TestState extends State<Test> {
         backgroundColor: Colors.red,
       ),
       body: Container(
-        child: FutureBuilder(
-          future: getsoru(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Soru> sorular = snapshot.data;
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.40 / 10),
-                      height: MediaQuery.of(context).size.height * 8 / 10,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Container(
-                              width: MediaQuery.of(context).size.width * 9 / 10,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 60),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.red, width: 4),
-                              ),
-                              child: Text(
-                                "${sorular[index].soru}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      3 /
-                                      10,
-                                  width: MediaQuery.of(context).size.width *
-                                      4.50 /
-                                      10,
-                                  child: RaisedButton(
-                                    elevation: 20,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    color: Colors.red,
-                                    onPressed: () {
-                                      setState(() {
-                                        if (index == 10) {
-                                        } else {
-                                          index = index + 1;
-                                        }
-                                      });
-                                    },
-                                    child: Text(
-                                      "Evet",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  height: MediaQuery.of(context).size.height *
-                                      3 /
-                                      10,
-                                  width: MediaQuery.of(context).size.width *
-                                      4.50 /
-                                      10,
-                                  child: RaisedButton(
-                                    elevation: 20,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (index == 10) {
-                                      } else {
-                                        index = index + 1;
-                                      }
-                                    },
-                                    child: Text(
-                                      "Hayır",
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+        child: city == ""
+            ? FutureBuilder(
+                future: getcity(),
+                builder: (context, snapshopt) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                            "Teste Başlamadan önce İlerde daha iyi hizmet saglamamız Lütfen için Bulundugunuz ili seçiniz ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold)),
+                        DropdownButton(
+                          items: snapshopt.data,
+                          onChanged: (value) {
+                            city = value;
+                          },
                         ),
-                      ),
+                        RaisedButton(
+                          color: Colors.red,
+                          child: Text(
+                            "Basla",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            setState(() {});
+                          },
+                        )
+                      ],
                     ),
-                  ],
-                ),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
+                  );
+                },
+              )
+            : FutureBuilder(
+                future: getsoru(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Soru> sorular = snapshot.data;
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height *
+                                    0.40 /
+                                    10),
+                            height: MediaQuery.of(context).size.height * 8 / 10,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        9 /
+                                        10,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 60),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                          color: Colors.red, width: 4),
+                                    ),
+                                    child: Text(
+                                      "${sorular[index].soru}",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                3 /
+                                                10,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                4.50 /
+                                                10,
+                                        child: RaisedButton(
+                                          elevation: 20,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          color: Colors.red,
+                                          onPressed: () async {
+                                            setState(() async {
+                                              if (index == 10) /////////////
+                                              {
+                                                //////////////////////////////
+                                              } /////////////
+                                              else //////////////
+                                              {
+                                                index = index + 1;
+                                                counter_yes++;
+                                                if (counter_yes == 4) {
+                                                  await sonuc(city);
+                                                }
+                                              }
+                                            });
+                                          },
+                                          child: Text(
+                                            "Evet",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                3 /
+                                                10,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                4.50 /
+                                                10,
+                                        child: RaisedButton(
+                                          elevation: 20,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                          color: Colors.white,
+                                          onPressed: () {
+                                            setState(() {
+                                              if (index == 10) {
+                                              } else {
+                                                index = index + 1;
+                                              }
+                                            });
+                                          },
+                                          child: Text(
+                                            "Hayır",
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
       ),
     );
   }

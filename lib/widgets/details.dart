@@ -1,6 +1,6 @@
 import 'package:covidapp/models/covidlist.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import '../styles/colorandstyles.dart';
 import 'counter.dart';
 
@@ -36,7 +36,7 @@ class CovidDetails extends StatelessWidget {
                 tarih.month.toString() +
                 "." +
                 tarih.year.toString(),
-            style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
+            // style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
