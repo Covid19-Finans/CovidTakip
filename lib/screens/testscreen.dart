@@ -95,12 +95,15 @@ class _TestState extends State<Test> {
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
-                           setState(() {
+                            setState(() {
                               city = sehir;
                             });
                           },
                         )
                       ],
+                    ),
+                  );
+                },
               )
             : FutureBuilder(
                 future: getsoru(),
@@ -163,6 +166,7 @@ class _TestState extends State<Test> {
                                                   BorderRadius.circular(30)),
                                           color: Colors.red,
                                           onPressed: () async {
+                                            setState(() {
                                               if (index == 9 &&
                                                   counter_yes >=
                                                       6) /////////////
@@ -183,12 +187,13 @@ class _TestState extends State<Test> {
                                                             SonucSayfa(
                                                                 text:
                                                                     "Vermiş olduğunuz cevaplara göre Covid-19 riski taşımamakta yada hafif geçirmektesiz. Eğer durumunuzun kötü olduğunu veya daha sonradan kötüleştiğini hissederseniz en yakın sağlık kuruluşuna başvurunuz")));
+                                              } /////////////
                                               else //////////////
                                               {
                                                 index = index + 1;
                                                 counter_yes++;
                                               }
-                                            };
+                                            });
                                             if (counter_yes == 4) {
                                               await sonuc(city);
                                             }
@@ -227,6 +232,7 @@ class _TestState extends State<Test> {
                                                             SonucSayfa(
                                                                 text:
                                                                     "Vermiş olduğunuz cevaplardan göre Covid-19 riski taşıyor olabilirsiniz. En yakın sağlık kuruluşuna başvurunuz yada belirtileriniz hafif geçiyor ise kendinizi evinizde izole ediniz"))); //////////////////////////////
+
                                               } else if (index == 9 &&
                                                   counter_yes <= 7) {
                                                 Navigator.push(
