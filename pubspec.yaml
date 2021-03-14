@@ -38,11 +38,11 @@ dev_dependencies:
   flutter_launcher_name: ^0.0.1
   flutter_launcher_icons: ^0.8.1
 flutter_icons:
-  image_path: "lib/assets/covid-19.png"
+  image_path: "lib/assets/icon.png"
   ios: true
   android: true
 flutter_launcher_name:
-  name: "Sputnik-V"
+  name: "Korona Vizör"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

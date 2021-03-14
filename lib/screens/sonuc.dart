@@ -1,3 +1,4 @@
+import 'package:covidapp/main.dart';
 import 'package:flutter/material.dart';
 
 class SonucSayfa extends StatelessWidget {
@@ -9,10 +10,19 @@ class SonucSayfa extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            }),
       ),
-      body: Container(
-        child: Center(
-          child: Text(text),
+      body: Center(
+        child: Container(
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

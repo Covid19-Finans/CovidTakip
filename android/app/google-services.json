@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:417731542777:android:0454928e448c4520702c28",
         "android_client_info": {
-          "package_name": "com.example.covidapp"
+          "package_name": "com.frame.covidapp"
         }
       },
       "oauth_client": [

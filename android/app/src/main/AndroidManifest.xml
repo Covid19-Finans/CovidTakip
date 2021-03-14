@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.covidapp">
+    package="com.frame.covidapp">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="Sputnik-V"
+        android:label="Korona Vizör"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
